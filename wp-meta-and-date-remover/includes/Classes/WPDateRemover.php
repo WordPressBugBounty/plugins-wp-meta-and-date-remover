@@ -22,6 +22,9 @@ class WPDateRemover {
     function applyVisualRemoverCode() {
         $options = $this->getOptions();
         $classMap = $options['visualRemoverClassMap'];
+        if ( empty( $classMap ) ) {
+            return;
+        }
         foreach ( $classMap as $key => $value ) {
             //if current post id is $key
             $isHomePage = is_home() || is_front_page();

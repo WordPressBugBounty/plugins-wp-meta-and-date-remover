@@ -6,14 +6,14 @@
  * Description: Remove meta and date information from posts and pages
  * Author: Prasad Kirpekar
  * Author URI: mailto:prasadkirpekar96@gmail.com
- * Version: 2.3.4
+ * Version: 2.3.5
  */
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 define( 'WPMDR_URL', plugin_dir_url( __FILE__ ) );
 define( 'WPMDR_DIR', plugin_dir_path( __FILE__ ) );
-define( 'WPMDR_VERSION', '2.3.4' );
+define( 'WPMDR_VERSION', '2.3.5' );
 if ( function_exists( 'wpmdr_fs' ) ) {
     wpmdr_fs()->set_basename( false, __FILE__ );
 } else {
