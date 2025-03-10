@@ -6,14 +6,14 @@
  * Description: Remove meta and date information from posts and pages
  * Author: Prasad Kirpekar
  * Author URI: mailto:prasadkirpekar96@gmail.com
- * Version: 2.3.5
+ * Version: 2.3.6
  */
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 define( 'WPMDR_URL', plugin_dir_url( __FILE__ ) );
 define( 'WPMDR_DIR', plugin_dir_path( __FILE__ ) );
-define( 'WPMDR_VERSION', '2.3.5' );
+define( 'WPMDR_VERSION', '2.3.6' );
 if ( function_exists( 'wpmdr_fs' ) ) {
     wpmdr_fs()->set_basename( false, __FILE__ );
 } else {
@@ -143,6 +143,7 @@ if ( function_exists( 'wpmdr_fs' ) ) {
                 'account_url'    => wpmdr_fs()->get_account_url(),
                 'plugin_version' => WPMDR_VERSION,
                 'site_url'       => site_url(),
+                'is_free'        => $this->isFreePlugin(),
                 'nonce'          => $ajax_nonce,
             ) );
             wp_localize_script( 'WPMDR-script-boot', 'WPMDRAdmin', $WPMDR );
@@ -150,6 +151,10 @@ if ( function_exists( 'wpmdr_fs' ) ) {
                 
                 <router-view></router-view>
             </div>';
+        }
+
+        public function isFreePlugin() {
+            return true;
         }
 
         public function registerShortCodes() {
@@ -160,7 +165,6 @@ if ( function_exists( 'wpmdr_fs' ) ) {
 
     }
 
-    ( new WPMDRMain() )->boot();
     function wpmdr_custom_hide() {
         if ( get_option( 'wpmdr_custom_hide', "1" ) == "1" ) {
             return false;
@@ -184,4 +188,5 @@ if ( function_exists( 'wpmdr_fs' ) ) {
     }
 
     add_action( 'wp_enqueue_scripts', 'enqueue_custom_script' );
+    ( new WPMDRMain() )->boot();
 }

@@ -75,6 +75,9 @@ class WPDateRemover {
         return $data;
     }
 
+    function rankMathFilter() {
+    }
+
     function resetFilter() {
         remove_filter( 'the_date', '__return_false' );
         remove_filter( 'the_time', '__return_false' );
@@ -197,6 +200,10 @@ class WPDateRemover {
         $data['showDebugLogs'] = filter_var( $_REQUEST['settings']['showDebugLogs'], FILTER_VALIDATE_BOOLEAN );
         $data['yoastSchemaRemoveDatePublished'] = filter_var( $_REQUEST['settings']['yoastSchemaRemoveDatePublished'], FILTER_VALIDATE_BOOLEAN );
         $data['yoastSchemaRemoveDateModified'] = filter_var( $_REQUEST['settings']['yoastSchemaRemoveDateModified'], FILTER_VALIDATE_BOOLEAN );
+        $data['rankMathSchemaRemoveArticleDatePublished'] = filter_var( $_REQUEST['settings']['rankMathSchemaRemoveArticleDatePublished'], FILTER_VALIDATE_BOOLEAN );
+        $data['rankMathSchemaRemoveArticleDateModified'] = filter_var( $_REQUEST['settings']['rankMathSchemaRemoveArticleDateModified'], FILTER_VALIDATE_BOOLEAN );
+        $data['rankMathSchemaRemoveOgDateUpdated'] = filter_var( $_REQUEST['settings']['rankMathSchemaRemoveOgDateUpdated'], FILTER_VALIDATE_BOOLEAN );
+        $data['rankMathSchemaRemoveYaOVSUploadDate'] = filter_var( $_REQUEST['settings']['rankMathSchemaRemoveYaOVSUploadDate'], FILTER_VALIDATE_BOOLEAN );
         $data['adminActivationNotice'] = true;
         $data['visualRemoverCSS'] = sanitize_text_field( $_REQUEST['settings']['visualRemoverCSS'] );
         $data['visualRemoverClassMap'] = $_REQUEST['settings']['visualRemoverClassMap'];
@@ -223,6 +230,10 @@ class WPDateRemover {
         $default['excludedCategories'] = get_option( 'wpmdr_excluded_categories', [] );
         $default['yoastSchemaRemoveDatePublished'] = get_option( 'wpmdr_yoast_datepublished', "0" ) != "0";
         $default['yoastSchemaRemoveDateModified'] = get_option( 'wpmdr_yoast_dateupdated', "0" ) != "0";
+        $default['rankMathSchemaRemoveArticleDatePublished'] = get_option( 'wpmdr_rankmath_article_datepublished', "0" ) != "0";
+        $default['rankMathSchemaRemoveArticleDateModified'] = get_option( 'wpmdr_rankmath_article_dateupdated', "0" ) != "0";
+        $default['rankMathSchemaRemoveOgDateUpdated'] = get_option( 'wpmdr_rankmath_og_dateupdated', "0" ) != "0";
+        $default['rankMathSchemaRemoveYaOVSUploadDate'] = get_option( 'wpmdr_rankmath_ya_ovs_upload_date', "0" ) != "0";
         $default['showDebugLogs'] = get_option( "wpmdr_debug_info", "0" ) != "0";
         $default['adminActivationNotice'] = true;
         $default['visualRemoverCSS'] = "";
@@ -238,6 +249,18 @@ class WPDateRemover {
         }
         if ( !isset( $data["removeByPHPLegacy"] ) ) {
             $data["removeByPHPLegacy"] = false;
+        }
+        if ( !isset( $data["rankMathSchemaRemoveArticleDatePublished"] ) ) {
+            $data["rankMathSchemaRemoveArticleDatePublished"] = false;
+        }
+        if ( !isset( $data["rankMathSchemaRemoveArticleDateModified"] ) ) {
+            $data["rankMathSchemaRemoveArticleDateModified"] = false;
+        }
+        if ( !isset( $data["rankMathSchemaRemoveOgDateUpdated"] ) ) {
+            $data["rankMathSchemaRemoveOgDateUpdated"] = false;
+        }
+        if ( !isset( $data["rankMathSchemaRemoveYaOVSUploadDate"] ) ) {
+            $data["rankMathSchemaRemoveYaOVSUploadDate"] = false;
         }
         return $data;
     }
